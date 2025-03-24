@@ -1,0 +1,4 @@
+name,gender,status,newStatus
+Revathy,female,active,inactive
+Test2,male,active,inactive
+Test3,male,inactive,active
