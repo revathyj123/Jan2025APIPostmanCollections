@@ -17,11 +17,12 @@ This repository contains Postman collections and related files for API testing. 
 1. Clone the repository:
    ```bash
    git clone https://github.com/revathyj123/Jan2025APIPostmanCollections.git
-
-TestData
-DataDrivenAPIs_collection.json
-GoRestAPIWorkflowCollection.json
-GoRestAPIWorkflow_globalCollection.json
-GoRestEnvironment.json
-GoRest_globals.json
-SimpleNewmanCollection.json
+   
+## Related files for Postman/Newman testing
+- TestData
+- DataDrivenAPIs_collection.json
+- GoRestAPIWorkflowCollection.json
+- GoRestAPIWorkflow_globalCollection.json
+- GoRestEnvironment.json
+- GoRest_globals.json
+- SimpleNewmanCollection.json
