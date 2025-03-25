@@ -130,7 +130,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"jrevathy82@gmail.com\",\r\n    \"password\": \"Ganesha@1983\"\r\n}",
+					"raw": "{\r\n    \"email\": \"userfnln@gmail.com\",\r\n    \"password\": \"myPassword\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -148,37 +148,6 @@
 					"path": [
 						"users",
 						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Logout",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{vault:User_token}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://thinking-tester-contact-list.herokuapp.com/users/logout",
-					"protocol": "https",
-					"host": [
-						"thinking-tester-contact-list",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"users",
-						"logout"
 					]
 				}
 			},
@@ -215,6 +184,37 @@
 					"path": [
 						"users",
 						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{vault:User_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/users/logout",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"logout"
 					]
 				}
 			},
