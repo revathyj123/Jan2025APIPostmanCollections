@@ -1,4 +1,0 @@
-firstName,lastName,birthdate,street1,street2,city,stateProvince,postalCode,country,newfirstName,newlastName,newbirthdate,newstreet1,newstreet2,newcity,newstateProvince,newpostalCode,newcountry
-TestFN1,TestLN1,1999-01-10,13 School St.,Apt.5,Washington,QC,A1A1A1,Canada,newTestFN1,newTestLN1,1999-01-10,13 newSchool St.,newApt.5,newWashington,QC,A0A0A0,Canada
-TestFN2,TestLN2,2000-01-10,13 School St.,Apt.6,Washington,QC,B1B1B1,Canada,newTestFN2,newTestLN2,1999-01-10,13 newSchool St.,newApt.6,newWashington,QC,A2A2A2,Canada
-TestFN3,TestLN3,2001-01-10,13 School St.,Apt.7,Washington,QC,C1C1C1,Canada,newTestFN3,newTestLN3,1999-01-10,13 newSchool St.,newApt.7,newWashington,QC,A3A3A3,Canada
