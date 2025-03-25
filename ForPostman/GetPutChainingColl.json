@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "3d4f06be-e30f-4a64-8f66-516bde620d57",
+		"name": "GET_PUT_Chaining_24thFeb",
+		"description": "This collection get all the array of userIDs from GET call and supply this array to PUT call to get singleUserIDs. Update the same and execute the PUT request.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41835826"
+	},
+	"item": [
+		{
+			"name": "1_GETAllUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const getResponse=pm.response.json();\r",
+							"const userIDs = getResponse.map(user=>user.id);\r",
+							"console.log(userIDs);\r",
+							"\r",
+							"pm.variables.set(\"user_ids\",userIDs);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2_UpdateAUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"userIDs = pm.variables.get(\"user_ids\");\r",
+							"\r",
+							"if (userIDs && Array.isArray(userIDs) && userIDs.length > 0) {\r",
+							"    // Set singleUserID with the first userID\r",
+							"    pm.variables.set(\"singleUserID\", userIDs.shift());\r",
+							"    \r",
+							"    // Update the variable to reflect the shifted array\r",
+							"    pm.variables.set(\"user_ids\", userIDs);\r",
+							"\r",
+							"    // Check again if userIDs is an array and has elements\r",
+							"    if (userIDs.length > 0) {\r",
+							"        // Call the PUT API \"2_UpdateAUser\"\r",
+							"        pm.execution.setNextRequest(\"2_UpdateAUser\");\r",
+							"    } else {\r",
+							"        console.log(\"All users are updated\");\r",
+							"    }\r",
+							"} else {\r",
+							"    console.log(\"user_ids is either not an array or it's empty\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Test_Feb24\",\r\n    \"status\":\"active\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users/{{singleUserID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{singleUserID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

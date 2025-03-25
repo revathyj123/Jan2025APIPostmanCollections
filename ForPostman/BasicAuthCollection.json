@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "df2c7ed8-05ff-41db-8a94-6657e0d89cbe",
+		"name": "BasicAuth_27thFeb",
+		"description": "To understand the concept of \"Basic Authentication\" which is another type of authorisation techniques like Cookie. Have to keep in mind about btoa('UN'+\":\"+'PW')==gives encoded string(client side); and atob('YXXXXXXXXX')==decoded string(server)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41835826"
+	},
+	"item": [
+		{
+			"name": "UpdateABooking",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\" : \"James\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2018-01-01\",\r\n        \"checkout\" : \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/booking/1779",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"booking",
+						"1779"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_BasicAuthAPI",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://the-internet.herokuapp.com/basic_auth",
+					"protocol": "https",
+					"host": [
+						"the-internet",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"basic_auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

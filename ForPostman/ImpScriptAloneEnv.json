@@ -1,0 +1,15 @@
+{
+	"id": "dda91bd3-ea3c-4789-a14c-65496b2eebca",
+	"name": "ImpScript_0303_alone",
+	"values": [
+		{
+			"key": "requestJson",
+			"value": "{\"firstname\":\"Test5\",\"lastname\":\"Brown\",\"totalprice\":111,\"depositpaid\":true,\"bookingdates\":{\"checkin\":\"2018-01-01\",\"checkout\":\"2019-01-01\"},\"additionalneeds\":\"Breakfast\"}",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-03-25T19:45:37.214Z",
+	"_postman_exported_using": "Postman/11.37.4"
+}

@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "c8f75291-a87c-4f9f-925b-a07704f91144",
+		"name": "ContactsAPI_DD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41835826"
+	},
+	"item": [
+		{
+			"name": "Login User-GetToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const tokenID = response.token;\r",
+							"console.log(\"My token id is \"+tokenID);\r",
+							"const bearerTokenID = \"Bearer \"+tokenID;\r",
+							"console.log(\"My Authorisation key is \"+bearerTokenID);\r",
+							"pm.collectionVariables.set(\"myTokenID\", bearerTokenID);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETAllContacts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    const jsonData = pm.response.json();\r",
+							"    const userID = jsonData._id;\r",
+							"    pm.variables.set(\"UserID\", userID);\r",
+							"    console.log(\"userID = \"+userID);\r",
+							"    \r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check the Actual and Expected Data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstName).to.eql(pm.iterationData.get(\"firstName\"));\r",
+							"\r",
+							"    pm.expect(jsonData.lastName).to.eql(pm.iterationData.get(\"lastName\"));\r",
+							"\r",
+							"    pm.expect(jsonData.birthdate).to.eql(pm.iterationData.get(\"birthdate\"));\r",
+							"\r",
+							"    pm.expect(jsonData.street1).to.eql(pm.iterationData.get(\"street1\"));\r",
+							"\r",
+							"    pm.expect(jsonData.street2).to.eql(pm.iterationData.get(\"street2\"));\r",
+							"\r",
+							"    pm.expect(jsonData.city).to.eql(pm.iterationData.get(\"city\"));\r",
+							"\r",
+							"    pm.expect(jsonData.stateProvince).to.eql(pm.iterationData.get(\"stateProvince\"));\r",
+							"\r",
+							"    pm.expect(jsonData.postalCode).to.eql(pm.iterationData.get(\"postalCode\"));\r",
+							"\r",
+							"    pm.expect(jsonData.country).to.eql(pm.iterationData.get(\"country\"));\r",
+							"    \r",
+							"    //fetch the email\r",
+							"    const rawBody = pm.request.body.raw;//Request/JSON Body/Json string\r",
+							"    //JSON body to JS object\r",
+							"    const reqBody = JSON.parse(rawBody);//JSON-interface, parse-method\r",
+							"    console.log(\"Random Email from request = \"+reqBody.email);\r",
+							"    const email=reqBody.email.toLowerCase();\r",
+							"    console.log(\"Expected Email = \"+email);\r",
+							"    //Actual Email vs Expected Email\r",
+							"    pm.expect(jsonData.email).to.eql(email);\r",
+							"\r",
+							"\r",
+							"    //Retrieve phone from req\r",
+							"    const phone=reqBody.phone;\r",
+							"    console.log(\"Expected phone = \"+phone);\r",
+							"    pm.expect(jsonData.phone).to.eql(phone);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"birthdate\": \"{{birthdate}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"street1\": \"{{street1}}\",\n    \"street2\": \"{{street2}}\",\n    \"city\": \"{{city}}\",\n    \"stateProvince\": \"{{stateProvince}}\",\n    \"postalCode\": \"{{postalCode}}\",\n    \"country\": \"{{country}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    pm.test(\"Check User Id is correct\", function () {\r",
+							"        const newUserID = pm.variables.get(\"UserID\")\r",
+							"        console.log(\"newUserID \"+newUserID);\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData._id).to.eql(newUserID);\r",
+							"    });"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{UserID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{UserID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Is Contact street1 updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(\"Actual street1 = \"+jsonData.street1);\r",
+							"    pm.expect(jsonData.street1).to.eql(pm.iterationData.get(\"newstreet1\"));\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"birthdate\": \"{{birthdate}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"street1\": \"{{newstreet1}}\",\n    \"street2\": \"{{newstreet2}}\",\n    \"city\": \"{{newcity}}\",\n    \"stateProvince\": \"{{newstateProvince}}\",\n    \"postalCode\": \"{{newpostalCode}}\",\n    \"country\": \"{{country}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{UserID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{UserID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Contact",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{UserID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{UserID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/logout",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "myTokenID",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "2c506400-46cf-48cf-b760-8bf48e586813",
+		"name": "Thirukkual_App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41835826"
+	},
+	"item": [
+		{
+			"name": "GetAllAdhigarams",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

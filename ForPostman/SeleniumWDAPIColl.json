@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "6532a7d8-02ee-44b1-a6d3-0ebe6c7fbba3",
+		"name": "SeleniumWDAPIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41835826"
+	},
+	"item": [
+		{
+			"name": "POST_1_LaunchBrowser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"capabilities\": {\r\n        \"alwaysMatch\": {\r\n            \"browserName\": \"chrome\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4444/session",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4444",
+					"path": [
+						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2_EnterUrl",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\":\"https://www.google.com/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4444/session/8fd1c696753087e549fad71a1772462d/url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4444",
+					"path": [
+						"session",
+						"8fd1c696753087e549fad71a1772462d",
+						"url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3_FindElement_Search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"using\":\"xpath\",\r\n    \"value\":\"//textarea[@name='q']\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4444/session/8fd1c696753087e549fad71a1772462d/element",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4444",
+					"path": [
+						"session",
+						"8fd1c696753087e549fad71a1772462d",
+						"element"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4_SendKeys",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\":\"Hello,Revathy!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4444/session/8fd1c696753087e549fad71a1772462d/element/f.E7AB60EA68BFD93829CFAF1F5F937B96.d.2A41AF9CF12D50443A3339E6B08C2DDE.e.1/value",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4444",
+					"path": [
+						"session",
+						"8fd1c696753087e549fad71a1772462d",
+						"element",
+						"f.E7AB60EA68BFD93829CFAF1F5F937B96.d.2A41AF9CF12D50443A3339E6B08C2DDE.e.1",
+						"value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5_findLink",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"using\": \"xpath\",\r\n    \"value\": \"//a[contains(text(),'About')]\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4444/session/8fd1c696753087e549fad71a1772462d/element",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4444",
+					"path": [
+						"session",
+						"8fd1c696753087e549fad71a1772462d",
+						"element"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6_ClickOnLink",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4444/session/8fd1c696753087e549fad71a1772462d/element/f.E7AB60EA68BFD93829CFAF1F5F937B96.d.2A41AF9CF12D50443A3339E6B08C2DDE.e.21/click",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4444",
+					"path": [
+						"session",
+						"8fd1c696753087e549fad71a1772462d",
+						"element",
+						"f.E7AB60EA68BFD93829CFAF1F5F937B96.d.2A41AF9CF12D50443A3339E6B08C2DDE.e.21",
+						"click"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
