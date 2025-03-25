@@ -1,6 +1,6 @@
 # Jan2025APIPostmanCollections
 
-This repository contains Postman collections and related files for API testing. It is designed to help with efficient and effective API testing for various scenarios.
+This repository contains Postman/Newman collections, Test data and envirometnt json files for API testing. It is designed to help with efficient and effective API testing for various scenarios.
 
 ## Features
 - Organized collections for structured API testing.
@@ -10,6 +10,7 @@ This repository contains Postman collections and related files for API testing. 
 
 ## Getting Started
 ### Prerequisites
+
 - [Postman](https://www.postman.com/) or Newman installed on your machine.
 - Git installed for cloning the repository.
 
@@ -26,3 +27,21 @@ This repository contains Postman collections and related files for API testing. 
 - GoRestEnvironment.json
 - GoRest_globals.json
 - SimpleNewmanCollection.json
+- BasicAuthCollection
+- BookingAPICollection
+- BookingEnv
+- ContactsAPIDDCollection
+- ContactsAPIEnvPracColl
+- CurlCommandColl
+- CurlGoRestColl
+- GetPutChainingColl
+- GoRestAPIParamColl
+- ImpScriptAloneEnv
+- NotesAPIollection
+- POSTBodyCollection
+- PostmanImpScripts
+- SeleniumWDAPIColl
+- ThirukkualAppCollection
+- UsersContactsAPIColl
+- WorkspacePMGlobEnv
+- XMLRequestPMColl
