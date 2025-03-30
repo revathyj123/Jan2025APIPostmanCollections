@@ -38,12 +38,12 @@ pipeline {
             parallel {
                 stage('Run GoRest Tests') {
                     steps {
-                        bat 'docker run --rm -v ${pwd}/newman:/app/results jrevathy82/gorestddtest:1.0'
+                        bat 'docker run --rm -v %cd%/newman:/app/results jrevathy82/gorestddtest:1.0'
                     }
                 }
                 stage('Run Booking Tests') {
                     steps {
-                        bat 'docker run --rm -v ${pwd}/newman:/app/results jrevathy82/mybookingapi:1.0'
+                        bat 'docker run --rm -v %cd%/newman:/app/results jrevathy82/mybookingapi:1.0'
                     }
                 }
             }
