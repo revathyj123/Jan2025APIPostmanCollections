@@ -37,7 +37,7 @@ pipeline {
 
         stage('Prepare Newman Results Directory') {
             steps {
-                bat 'mkdir %cd%\\newman' 
+                bat 'mkdir %cd%/newman' 
             }
         }
 
