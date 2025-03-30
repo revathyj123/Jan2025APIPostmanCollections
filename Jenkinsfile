@@ -1,15 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Clean Workspace') {
-            steps {
-                script {
-                    // Deletes everything in the current workspace
-                    deleteDir()
-                    echo 'Workspace cleaned successfully.'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 echo "Building the war"
