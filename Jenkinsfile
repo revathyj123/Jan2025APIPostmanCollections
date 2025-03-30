@@ -13,36 +13,70 @@ pipeline {
                 echo "Deploying to QA"
             }
         }
-
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/revathyj123/Jan2025APIPostmanCollections'
+        stage('Pull Docker Images') {
+            parallel {
+                stage('Pull GoRest Image') {
+                    steps {
+                        bat 'docker pull jrevathy82/gorestddtest:1.0'
+                    }
+                }
+                stage('Pull Booking Image') {
+                    steps {
+                        bat 'docker pull jrevathy82/mybookingapi:1.0'
+                    }
+                }
             }
         }
 
-        stage('Pull Docker Image') {
+        stage('Prepare Newman Results Directory') {
             steps {
-                bat 'docker pull jrevathy82/gorestddtest:1.0'
+                sh 'mkdir -p ${pwd}/newman' 
             }
         }
 
-        stage('Run API Test Cases') {
-            steps {
-                bat 'docker run -v %cd%/newman:/app/results jrevathy82/gorestddtest:1.0'
+        stage('Run API Test Cases in Parallel') {
+            parallel {
+                stage('Run GoRest Tests') {
+                    steps {
+                        bat 'docker run --rm -v ${pwd}/newman:/app/results jrevathy82/gorestddtest:1.0'
+                    }
+                }
+                stage('Run Booking Tests') {
+                    steps {
+                        bat 'docker run --rm -v ${pwd}/newman:/app/results jrevathy82/mybookingapi:1.0'
+                    }
+                }
             }
         }
 
-        stage('Publish HTML Extra Report') {
-            steps {
-                publishHTML([
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: 'newman',
-                    reportFiles: 'gorest.html',
-                    reportName: 'HTML Extra API Report',
-                    reportTitles: ''
-                ])
+        stage('Publish HTML Extra Reports') {
+            parallel {
+                stage('Publish GoRest Report') {
+                    steps {
+                        publishHTML([
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: 'newman',
+                            reportFiles: 'gorest.html',
+                            reportName: 'GoRest API Report',
+                            reportTitles: ''
+                        ])
+                    }
+                }
+                stage('Publish Booking Report') {
+                    steps {
+                        publishHTML([
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: 'newman',
+                            reportFiles: 'booking.html',
+                            reportName: 'Booking API Report',
+                            reportTitles: ''
+                        ])
+                    }
+                }
             }
         }
 
