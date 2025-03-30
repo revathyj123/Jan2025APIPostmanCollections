@@ -30,7 +30,7 @@ pipeline {
 
         stage('Prepare Newman Results Directory') {
             steps {
-                sh 'mkdir -p ${pwd}/newman' 
+                bat 'mkdir -p ${pwd}/newman' 
             }
         }
 
