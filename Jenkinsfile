@@ -1,13 +1,11 @@
 pipeline {
     agent any
     stages {
-
         stage('Build') {
             steps {
                 echo "Building the war"
             }
         }
-
         stage("Deploy to QA") {
             steps {
                 echo "Deploying to QA"
