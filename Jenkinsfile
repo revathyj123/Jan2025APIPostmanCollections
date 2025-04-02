@@ -1,15 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Clean Workspace') {
-            steps {
-                script {
-                    // Deletes everything in the current workspace
-                    deleteDir()
-                    echo 'Workspace cleaned successfully.'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 echo "Building the war"
@@ -34,23 +25,16 @@ pipeline {
                 }
             }
         }
-
-        stage('Prepare Newman Results Directory') {
-            steps {
-                bat 'mkdir "%cd%\\newman"' 
-            }
-        }
-
         stage('Run API Test Cases in Parallel') {
             parallel {
                 stage('Run GoRest Tests') {
                     steps {
-                        bat 'docker run --rm -v %cd%/newman:/app/results jrevathy82/gorestddtest:1.0'
+                        bat 'docker run --rm -v %cd%\\newman:/app/results jrevathy82/gorestddtest:1.0'
                     }
                 }
                 stage('Run Booking Tests') {
                     steps {
-                        bat 'docker run --rm -v %cd%/newman:/app/results jrevathy82/mybookingapi:1.0'
+                        bat 'docker run --rm -v %cd%\\newman:/app/results jrevathy82/mybookingapi:1.0'
                     }
                 }
             }
